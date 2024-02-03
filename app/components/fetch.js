@@ -74,10 +74,11 @@ function Fetch() {
     // Add more color mappings as needed
   };
 
+
   return (
-    <div className="flex flex-wrap justify-around">
+    <div className="flex gap-2 justify-start">
       {Object.entries(data).map(([category, categoryData]) => (
-        <div key={category} className="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2  card ">
+        <div key={category} className="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2">
           <h2 className="text-xl font-bold mb-2">{category}</h2>
           {Object.entries(categoryData).reduce((acc, [property, value], index, arr) => {
             const mappedProperty = nameMapping[property] || property;
@@ -87,8 +88,7 @@ function Fetch() {
               if (nextProperty) {
                 const nextValueWithSuffix = `${nextProperty[1]} ${valueSuffixes[nextProperty[0]] || ''}`;
                 acc.push(
-                  <div key={property} className="card bg-white rounded-lg shadow-md p-6 gap mb-4 w-custom-medium lg:w-custom-large h-custom">
-
+                  <div key={property} className="bg-white rounded-lg shadow-md p-5 gap-4 mb-4 w-30 md:w-custom-medium lg:w-custom-large">
                     <div className="icon-shape icon-shape-primary rounded-lg mr-4 sm:mr-0  bg-gray-400 h-16 w-16 flex items-center justify-center">
                       <svg className="icon h-8 w-8 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" cx="16" cy="16" r="13" fill={colorMapping[property]} clip-rule="evenodd"></path>
@@ -110,6 +110,7 @@ function Fetch() {
                   <p className="text-black font-extrabold text-3xl">{valueWithSuffix}</p>
                 </div>
               );
+
             }
             return acc;
           }, [])}
@@ -118,5 +119,5 @@ function Fetch() {
     </div>
   );
 }
-
+export { firebaseConfig };
 export default Fetch;
