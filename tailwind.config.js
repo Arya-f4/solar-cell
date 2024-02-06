@@ -8,12 +8,18 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        'custom-large': '35rem',
-        'custom-medium': '25rem',
-        'custom-small': '15rem',
+        'custom-large': '25rem',
+        'custom-large-medium': '20rem',
+        'custom-medium': '15rem',
+        'custom-small': '14rem',
 
       },
+      screens: {
+        cs: "900px",
+        xs: "640px",
+      },
       height: {
+
         'custom-large': '40rem',
         'custom-medium': '30rem',
         'custom-small': '20rem',
