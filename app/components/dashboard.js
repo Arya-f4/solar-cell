@@ -18,11 +18,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+
 //=========================
 
 //=====================================
 
-function Fetch() {
+function Dashboard() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -53,6 +54,7 @@ function Fetch() {
     "X axis angle": "Y axis angle",
     "Current": "Energy",
     "Power": "Voltage",
+    "Time": "",
     // Add more groupings as needed
   };
   const valueSuffixes = {
@@ -62,6 +64,7 @@ function Fetch() {
     "Energy": "W",
     "Power": "W",
     "Voltage": "V",
+    "Time": "",
     // Add more suffixes as needed
   };
   const colorMapping = {
@@ -71,11 +74,13 @@ function Fetch() {
     "Energy": "green",
     "Power": "orange",
     "Voltage": "orange",
+    "TIme": "blue"
     // Add more color mappings as needed
   };
 
 
   return (
+
     <div className="flex-row md:flex gap-2 justify-start">
       {Object.entries(data).map(([category, categoryData]) => (
         <div key={category} className="w-full">
@@ -87,6 +92,7 @@ function Fetch() {
               const nextProperty = arr.find(([key]) => key === groupedProperties[property]);
               if (nextProperty) {
                 const nextValueWithSuffix = `${nextProperty[1]} ${valueSuffixes[nextProperty[0]] || ''}`;
+
                 acc.push(
                   <div key={property} className="cursor-pointer transition-all duration-500 hover:translate-y-2 h-50 bg-neutral-50 rounded-lg shadow-xl flex flex-col items-start justify-center gap-4 before:absolute before:w-full hover:before:top-0 before:duration-500 before:-top-1 before:h-1 p-5 mb-4 sm:w-custom-large cs:w-custom-large-medium md:w-custom-medium lg:w-[480px]">
                     <div className="icon-shape icon-shape-primary rounded-lg mr-4 sm:mr-0  bg-gray-400 h-16 w-16 flex items-center justify-center">
@@ -103,14 +109,25 @@ function Fetch() {
                 );
                 arr.splice(arr.indexOf(nextProperty), 1); // remove the next property from the array
               }
-            } else {
-              acc.push(
-                <div key={property} className="card bg-white rounded-lg shadow-md p-6 mb-4">
-                  <h3 className="text-gray-700 text-lg font-semibold mb-1">{mappedProperty}</h3>
-                  <p className="text-black font-extrabold text-3xl">{valueWithSuffix}</p>
-                </div>
-              );
-
+            }
+            else {
+              if (!acc.find(card => card.key === 'rest')) {
+                acc.push(
+                  <div key='rest' className="card bg-white rounded-lg shadow-md p-6 mb-4">
+                    <div>
+                      <p className="text-black font-extrabold text-1xl">
+                        {arr.map((item, index) => {
+                          if (index === 9) {
+                            return item[1] + '   ';
+                          }
+                          return item[1];
+                        }).join('')}
+                      </p>
+                    </div>
+                  </div>
+                );
+              }
+              arr = []; // clear the array
             }
             return acc;
           }, [])}
@@ -120,4 +137,4 @@ function Fetch() {
   );
 }
 export { firebaseConfig };
-export default Fetch;
+export default Dashboard;

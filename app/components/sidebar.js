@@ -1,8 +1,12 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { useDatabased } from './download.js';
+import { useDatabase } from './download.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTachometerAlt, faSun, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from 'react';
+import { DashboardContext } from '../DashboardContext';
+
+
 const Sidebar = ({ isOpen, setIsOpen }) => {
 
   // const downloadCSV = async () => {
@@ -15,7 +19,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   //   link.download = 'data.csv';
   //   link.click();
   // };
-  const data = useDatabased();
+  const data = useDatabase();
+  const { setDashboardContent } = useContext(DashboardContext);
 
 
   const downloadCSV = () => {
@@ -57,15 +62,13 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         </div>
 
       </div>
-      <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-700 text-white">
+      <div onClick={() => setDashboardContent('default')} className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-700 text-white">
         <FontAwesomeIcon icon={faTachometerAlt} className="mr-2" />
         <span className='text-[15] ml-4 text-gray-200'>Dashboard</span>
-
       </div>
-      <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-700 text-white">
+      <div onClick={() => setDashboardContent('table')} className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-700 text-white">
         <FontAwesomeIcon icon={faSun} className="mr-2" />
         <span className='text-[15] ml-4 text-gray-200'>Solar Cell</span>
-
       </div>
       <div onClick={downloadCSV} className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-700 text-white">
         <FontAwesomeIcon icon={faDownload} className="mr-2" />
