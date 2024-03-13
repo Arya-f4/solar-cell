@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { apikey, authDomain, databaseURL, projectId, storageBucket, mesaggingSenderId, appId, measurementId } from "../utils/auth-firebase";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, off, get, child } from "firebase/database";
+// import TimelineGraph from './TimelineGraph';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCcmyjVxC8E2Lbl1FvMs0_mCkcJ_x5x87k',
@@ -133,6 +134,10 @@ function Dashboard() {
           }, [])}
         </div>
       ))}
+      {/* <div className="w-full">
+        <h2 className="text-xl font-bold mb-2">Power Timeline</h2>
+        <TimelineGraph />
+      </div> */}
     </div>
   );
 }

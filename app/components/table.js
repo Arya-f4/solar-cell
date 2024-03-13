@@ -64,40 +64,39 @@ function Table() {
 
   const endOffset = itemOffset + pageSize;
   const currentData = sortedData.slice(itemOffset, endOffset);
-  console.log(currentData)
   return (
-    <div className="overflow-x-auto">
+    <div className="w-full overflow-auto">
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
               #
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
               Time
               <button
-                className="ml-2 text-xs font-medium text-gray-500 hover:text-gray-900"
+                className="ml-2 text-sm font-medium text-gray-500 hover:text-gray-900"
                 onClick={handleSortOrderChange}
               >
                 {sortOrder === 'asc' ? '▲' : '▼'}
               </button>
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
               X_axis_angle (deg)
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
               Y_axis_angle (deg)
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
               Power (W)
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
               Energy (W)
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
               Current (A)
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
               Voltage (V)
             </th>
           </tr>
@@ -106,32 +105,32 @@ function Table() {
           {currentData.map((item, index) => (
             <tr key={index}>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">{itemOffset + index + 1}</div>
+                <div className="text-xl text-gray-900">{itemOffset + index + 1}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">{item.Time}</div>
+                <div className="text-xl text-gray-900">{item.Time}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">
+                <div className="text-xl text-gray-900">
                   {item['X_axis_angle']} deg
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">
+                <div className="text-xl text-gray-900">
                   {item['Y_axis_angle']} deg
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">{item.Power} W</div>
+                <div className="text-xl text-gray-900">{item.Power} W</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">{item.Energy} W</div>
+                <div className="text-xl text-gray-900">{item.Energy} W</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">{item.Current} A</div>
+                <div className="text-xl text-gray-900">{item.Current} A</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">{item.Voltage} V</div>
+                <div className="text-xl text-gray-900">{item.Voltage} V</div>
               </td>
             </tr>
           ))}
@@ -159,13 +158,14 @@ function Table() {
         previousLabel="<"
         renderOnZeroPageCount={null}
         containerClassName="flex justify-center mt-4"
-        pageLinkClassName="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 rounded-md"
+        pageLinkClassName="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray:100 hover:text-gray-700 rounded-md"
         previousLinkClassName="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 rounded-md"
         nextLinkClassName="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 rounded-md"
         activeLinkClassName="block px-3 py-2 leading-tight text-white bg-indigo-500 border border-indigo-500 rounded-md"
-        breakLinkClassName="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 rounded-md"
+        breakLinkClassName="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 active:bg-blue-100 hover:text-gray-700 rounded-md"
       />
     </div>
   );
 }
+export { db };
 export default Table;
