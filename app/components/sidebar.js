@@ -22,30 +22,16 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   const data = useDatabase();
   const { setDashboardContent } = useContext(DashboardContext);
 
-
   const downloadCSV = () => {
-    if (data) {
-      // Flatten the nested objects into a single level object
-      const flattenedData = Object.entries(data).reduce((acc, [key, value]) => {
-        Object.entries(value).forEach(([subKey, subValue]) => {
-          acc[`${key} - ${subKey}`] = subValue;
-        });
-        return acc;
-      }, {});
 
-      // Convert the flattened object into CSV
-      const csvData = Object.keys(flattenedData).join(',') + '\n' + Object.values(flattenedData).join(',');
+    let csvContent = "Time,X_axis_angle (deg),Y_axis_angle (deg),Power (W),Energy (W),Current (A),Voltage (V)\n";
+    data.forEach((item) => {
+      csvContent += `${item.Time},${item['X_axis_angle']} deg,${item['Y_axis_angle']} deg,${item.Power} W,${item.Energy} W,${item.Current} A,${item.Voltage} V\n`;
+    });
 
-      const blob = new Blob([csvData], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'data.csv';
-      link.click();
-    } else {
-      console.log('Data is not available');
-    }
-  };
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    saveAs(blob, 'solar_data.csv');
+  }
 
   return isOpen && (
     <nav className={`sidebar z-10 transform transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} bg-gray-900 text-white h-screen md:w-[250px] lg:left-0 w-full md:absolutetop-0 bottom-0 left-0 overflow-y-auto sm:w-64 fixed`}>

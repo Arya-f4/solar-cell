@@ -3,7 +3,7 @@
 import { firebaseConfig } from "./dashboard";
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc } from 'firebase/firestore';
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -16,16 +16,9 @@ const useDatabase = () => {
     const fetchData = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "Solar"));
-        const fetchedData = querySnapshot.docs.map(doc => {
-          const docData = doc.data();
-
-          // Perform operation on each document data
-          // For example, let's log the data
-          console.log(docData);
-
-          return docData;
-        });
+        const fetchedData = querySnapshot.docs.map(doc => doc.data());;
         setData(fetchedData);
+        setPageCount(Math.ceil(fetchedData.length / pageSize));
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -35,6 +28,7 @@ const useDatabase = () => {
 
     fetchData();
   }, []);
+
 
   return data;
 };
