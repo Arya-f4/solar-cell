@@ -1,5 +1,5 @@
 'use client'
-
+// DATA STATIS COMPONENT
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, doc } from 'firebase/firestore';
@@ -76,7 +76,7 @@ function Table() {
     saveAs(blob, 'solar_data.csv');
   };
   const showAllData = () => {
-    setPageSize(data.length);
+    setPageSize(data.length); z
     setPageCount(1);
     setItemOffset(0);
   };
