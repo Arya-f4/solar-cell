@@ -13,7 +13,7 @@ import { saveAs } from 'file-saver';
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-function Table() {
+function Dataflex() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,7 +25,7 @@ function Table() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "Statis_Solar"));
+        const querySnapshot = await getDocs(collection(db, "Solar"));
 
         const fetchedData = querySnapshot.docs.map(doc => doc.data());
         setData(fetchedData);
@@ -193,4 +193,4 @@ function Table() {
   );
 }
 export { db };
-export default Table;
+export default Dataflex;

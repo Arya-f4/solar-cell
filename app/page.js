@@ -1,17 +1,13 @@
 'use client'
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { apikey, authDomain, databaseURL, projectId, storageBucket, mesaggingSenderId, appId, measurementId } from "./utils/auth-firebase";
-import Image from "next/image";
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, child } from "firebase/database";
 import Dashboard from "./components/dashboard";
 import Table from "./components/table";
-import Sidebar from "./components/sidebar";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { DashboardContext } from './DashboardContext';
 
+import { DashboardContext } from './DashboardContext';
+import Dataflex from './components/dataflex';
+import Flexsible from './components/flexsible';
+import Graphic from './components/graphic';
 //=========================
 
 //=====================================
@@ -22,7 +18,7 @@ const SidebarWithNoSSR = dynamic(() => import('./components/sidebar'), {
 export default function Home() {
   const [isOpen, setIsOpen] = useState(true);
   const [dashboardContent, setDashboardContent] = useState('default');
-
+  console.log(dashboardContent)
   const handleCheckboxChange = (event) => {
     setIsOpen(event.target.checked);
     const checkbox = document.getElementById('menuToggle');
@@ -95,8 +91,11 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-row flex-wrap box-border">
-            {dashboardContent === 'table' ? <Table /> : <Dashboard />}
-          </div>
+
+            {dashboardContent === 'table' ? <Table /> :
+              (dashboardContent === 'dataflex' ? <Dataflex /> :
+                (dashboardContent === 'graphic' ? <Graphic /> :
+                  (dashboardContent === 'flexsible' ? <Flexsible /> : <Dashboard />)))}   </div>
         </div>
       </main>
     </DashboardContext.Provider>
